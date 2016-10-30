@@ -1,0 +1,9 @@
+{
+      "errorDescription":"Something went wrong",
+      "errorType":"INTERNAL_SERVER_ERROR",
+      "providerError":{
+         "parameterName":"OriginPlace",
+         "parameterValue":"Some dodgy value",
+         "message":"Incorrect value"
+      }
+}
