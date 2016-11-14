@@ -1,6 +1,11 @@
 package com.flymatcher.error.builders;
 
 import static com.flymatcher.error.builders.FlymatcherProviderErrorBuilder.aFlymatcherProviderError;
+import static java.util.Arrays.asList;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import com.flymatcher.error.ErrorType;
 import com.flymatcher.error.FlymatcherError;
@@ -10,7 +15,7 @@ public class FlymatcherErrorBuilder {
 
   private String errorDescription;
   private ErrorType errorType;
-  private FlymatcherProviderError providerError;
+  private List<FlymatcherProviderError> providerErrors;
 
   private FlymatcherErrorBuilder() {}
 
@@ -23,7 +28,7 @@ public class FlymatcherErrorBuilder {
 
     flymatcherError.setErrorDescription(errorDescription);
     flymatcherError.setErrorType(errorType);
-    flymatcherError.setProviderError(providerError);
+    flymatcherError.setProviderErrors(providerErrors);
 
     return flymatcherError;
   }
@@ -39,16 +44,36 @@ public class FlymatcherErrorBuilder {
     return this;
   }
 
-  public FlymatcherErrorBuilder withFlymatcherProviderError(
-      final FlymatcherProviderError providerError) {
-    this.providerError = providerError;
+  public FlymatcherErrorBuilder withFlymatcherProviderErrors(
+      final FlymatcherProviderErrorBuilder... builders) {
+    return withFlymatcherProviderErrors(Arrays.asList(builders));
+
+  }
+
+  public FlymatcherErrorBuilder withFlymatcherProviderErrors(
+      final List<FlymatcherProviderErrorBuilder> builders) {
+    if (null == this.providerErrors) {
+      this.providerErrors = new ArrayList<FlymatcherProviderError>();
+    }
+
+    for (final FlymatcherProviderErrorBuilder builder : builders) {
+      this.providerErrors.add(builder.build());
+    }
+
     return this;
   }
 
+  public FlymatcherErrorBuilder withNoFlymatcherProviderErrors() {
+    this.providerErrors = null;
+    return this;
+
+  }
+
+
   public FlymatcherErrorBuilder withDefaultValues() {
-    this.providerError = aFlymatcherProviderError().withDefaultValues().build();
-    this.errorType = ErrorType.INTERNAL_SERVER_ERROR;
-    this.errorDescription = "Something went wrong";
+    this.providerErrors = asList(aFlymatcherProviderError().withDefaultValues().build());
+    this.errorType = ErrorType.BAD_REQUEST;
+    this.errorDescription = "Validation Error";
 
     return this;
   }

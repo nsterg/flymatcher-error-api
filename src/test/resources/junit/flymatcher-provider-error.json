@@ -1,9 +1,9 @@
 {
-      "errorDescription":"Something went wrong",
-      "errorType":"INTERNAL_SERVER_ERROR",
-      "providerError":{
+      "errorDescription":"Validation Error",
+      "errorType":"BAD_REQUEST",
+      "providerErrors":[{
          "parameterName":"OriginPlace",
          "parameterValue":"Some dodgy value",
          "message":"Incorrect value"
-      }
+      }]
 }

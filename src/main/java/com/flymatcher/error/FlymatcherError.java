@@ -4,11 +4,13 @@ import static org.apache.commons.lang.builder.EqualsBuilder.reflectionEquals;
 import static org.apache.commons.lang.builder.HashCodeBuilder.reflectionHashCode;
 import static org.apache.commons.lang.builder.ToStringBuilder.reflectionToString;
 
+import java.util.List;
+
 public class FlymatcherError {
 
   private String errorDescription;
 
-  private FlymatcherProviderError providerError;
+  private List<FlymatcherProviderError> providerErrors;
 
   private ErrorType errorType;
 
@@ -20,12 +22,12 @@ public class FlymatcherError {
     this.errorDescription = errorDescription;
   }
 
-  public FlymatcherProviderError getProviderError() {
-    return providerError;
+  public List<FlymatcherProviderError> getProviderErrors() {
+    return providerErrors;
   }
 
-  public void setProviderError(final FlymatcherProviderError providerError) {
-    this.providerError = providerError;
+  public void setProviderErrors(final List<FlymatcherProviderError> providerErrors) {
+    this.providerErrors = providerErrors;
   }
 
   public ErrorType getErrorType() {

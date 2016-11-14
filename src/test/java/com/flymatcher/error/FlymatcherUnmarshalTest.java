@@ -41,7 +41,8 @@ public class FlymatcherUnmarshalTest {
   public void shouldUnmarshalFlymatcherNoProviderError()
       throws JsonParseException, JsonMappingException, IOException {
     final FlymatcherError expectedDto =
-        aFlymatcherError().withDefaultValues().withFlymatcherProviderError(null).build();
+        aFlymatcherError().withErrorDescription("Something went wrong")
+            .withErrorType(ErrorType.INTERNAL_SERVER_ERROR).build();
 
     final String json =
         readFileToString(new File("src/test/resources/junit/flymatcher-error.json"));
